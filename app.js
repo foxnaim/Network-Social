@@ -16,7 +16,9 @@ app.use("/uploads", express.static('uploads'))
 
 app.use('/api', require("./routes"))
 
-if(fs.existsSync('uploads'))
+if(fs.existsSync('uploads')){
+  fs.mkdirSync('uploads')
+}
 
 
 // catch 404 and forward to error handler
