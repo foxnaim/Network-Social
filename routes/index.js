@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer')
+const multer = require('multer');
+const { UserController } = require('../controllers');
 
 const uploadDestination = "uploads"
 // хронилище
@@ -13,8 +14,11 @@ const storage = multer.diskStorage({
 
 const uploads = multer({storage: storage})
 
-router.get('/register', (req, res) =>{
-res.send('register');
-})
+router.post('/register', UserController.register)
+router.post('/login', UserController.login)
+router.get('/current', UserController.current)
+router.get('/user/:id', UserController.login)
+router.put('/user/:id', UserController.updateUser)
+
 
 module.exports = router; 
