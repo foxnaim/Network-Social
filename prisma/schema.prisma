@@ -9,6 +9,41 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+  model User{
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    email String @unique
+    password String
+    name String?
+    avatarUrl String?
+    dateOfBirth DateTime?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    bio String?
+    location String?
+    posts Post[]
+    likes Like[]
+    comments Comment[]
+    followers Follows[] @relation("following")
+    following Follows[] @relation("follower")
+  }
+
+
+model Follows{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  follower User @relation("follower", fields: [followerId], references: [id])
+  followerId String @db.ObjectId
+  following User @relation("following", fields: [followingId], references: [id])
+  followingId String @db.ObjectId
+}
+
+
+model Post{
+   id String @id @default(auto()) @map("_id") @db.ObjectId
+   content String
+   author User @relation(fields: [authorId], references: [id])
+   authorId String @db.ObjectId
+
 }
