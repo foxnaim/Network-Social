@@ -1,6 +1,13 @@
 const UserController = {
  register: async (req, res) =>{
-  res.send("register")
+ const {
+  email,
+ password,
+ name,
+ } = req.body
+ console.log(email,
+  password,
+  name,)
  },
  login: async (req, res) =>{
   res.send("Login")

@@ -17,7 +17,7 @@ const uploads = multer({storage: storage})
 router.post('/register', UserController.register)
 router.post('/login', UserController.login)
 router.get('/current', UserController.current)
-router.get('/user/:id', UserController.login)
+router.get('/user/:id', UserController.getUserById)
 router.put('/user/:id', UserController.updateUser)
 
 
