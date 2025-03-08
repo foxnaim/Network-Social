@@ -1,7 +1,7 @@
 const { prisma } = require("../prisma/prisma-client");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const path = require("path");
 const UserController = {
   register: async (req, res) => {
     const { email, password, name } = req.body;
@@ -17,6 +17,14 @@ const UserController = {
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
+      const png = jwt.toPng(name, 200)
+      const avatarName = `$(name)_${Date.now()}.png`;
+      const avatarPath = path.join(__dirname, "../uploads", avatarName);
+
+      const user = await prisma.user.create({
+       
+      })
+
       const newUser = await prisma.user.create({
         data: {
           email,
