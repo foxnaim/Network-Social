@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const path = require("path");
 const fs = require("fs");
+const { v4: isUuid } = require("uuid");
 
 const User = {
   register: async (req, res) => {
@@ -22,7 +23,7 @@ const User = {
       const avatarName = `${name}_${Date.now()}.png`;
       const avatarPath = path.join(__dirname, "../uploads", avatarName);
 
-      // Заглушка изображения (можно заменить на генерацию аватара)
+      // Заглушка изображения
       const pngBuffer = Buffer.alloc(200, 0);
       fs.writeFileSync(avatarPath, pngBuffer);
 
@@ -89,6 +90,11 @@ const User = {
 
   getUserById: async (req, res) => {
     const { id } = req.params;
+    
+    if (!isUuid(id)) {
+      return res.status(400).json({ error: "Некорректный ID пользователя" });
+    }
+
     try {
       const user = await prisma.user.findUnique({ where: { id } });
       if (!user) {
@@ -104,6 +110,11 @@ const User = {
   updateUser: async (req, res) => {
     const { id } = req.params;
     const { name, email } = req.body;
+
+    if (!isUuid(id)) {
+      return res.status(400).json({ error: "Некорректный ID пользователя" });
+    }
+
     try {
       const user = await prisma.user.update({
         where: { id },
@@ -112,6 +123,11 @@ const User = {
       res.json(user);
     } catch (error) {
       console.error("Ошибка при обновлении данных:", error);
+      
+      if (error.code === "P2025") { // Ошибка, если пользователь не найден
+        return res.status(404).json({ error: "Пользователь не найден" });
+      }
+
       res.status(500).json({ error: "Ошибка при обновлении данных" });
     }
   },
