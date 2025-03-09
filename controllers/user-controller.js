@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const path = require("path");
 const fs = require("fs");
 
-const UserController = {
+const User = {
   register: async (req, res) => {
     const { email, password, name } = req.body;
 
@@ -21,9 +21,9 @@ const UserController = {
       const hashedPassword = await bcrypt.hash(password, 10);
       const avatarName = `${name}_${Date.now()}.png`;
       const avatarPath = path.join(__dirname, "../uploads", avatarName);
-      
-      // Создаем заглушку изображения (можно заменить на генерацию аватара)
-      const pngBuffer = Buffer.alloc(200, 0); 
+
+      // Заглушка изображения (можно заменить на генерацию аватара)
+      const pngBuffer = Buffer.alloc(200, 0);
       fs.writeFileSync(avatarPath, pngBuffer);
 
       const newUser = await prisma.user.create({
@@ -35,12 +35,19 @@ const UserController = {
         },
       });
 
-      const token = jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET, {
-        expiresIn: "7d",
-      });
+      const token = jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
-      res.status(201).json({ token, user: { id: newUser.id, email, name, avatarUrl: `/uploads/${avatarName}` } });
+      res.status(201).json({
+        token,
+        user: {
+          id: newUser.id,
+          email: newUser.email,
+          name: newUser.name,
+          avatarUrl: newUser.avatarUrl,
+        },
+      });
     } catch (error) {
+      console.error("Ошибка при регистрации:", error);
       res.status(500).json({ error: "Ошибка сервера" });
     }
   },
@@ -63,12 +70,19 @@ const UserController = {
         return res.status(400).json({ error: "Неверные учетные данные" });
       }
 
-      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
-        expiresIn: "7d",
-      });
+      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
-      res.json({ token, user: { id: user.id, email, name: user.name } });
+      res.json({
+        token,
+        user: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          avatarUrl: user.avatarUrl,
+        },
+      });
     } catch (error) {
+      console.error("Ошибка при входе:", error);
       res.status(500).json({ error: "Ошибка сервера" });
     }
   },
@@ -76,12 +90,13 @@ const UserController = {
   getUserById: async (req, res) => {
     const { id } = req.params;
     try {
-      const user = await prisma.user.findUnique({ where: { id: Number(id) } });
+      const user = await prisma.user.findUnique({ where: { id } });
       if (!user) {
         return res.status(404).json({ error: "Пользователь не найден" });
       }
       res.json(user);
     } catch (error) {
+      console.error("Ошибка при получении пользователя:", error);
       res.status(500).json({ error: "Ошибка сервера" });
     }
   },
@@ -91,11 +106,12 @@ const UserController = {
     const { name, email } = req.body;
     try {
       const user = await prisma.user.update({
-        where: { id: Number(id) },
+        where: { id },
         data: { name, email },
       });
       res.json(user);
     } catch (error) {
+      console.error("Ошибка при обновлении данных:", error);
       res.status(500).json({ error: "Ошибка при обновлении данных" });
     }
   },
@@ -108,9 +124,10 @@ const UserController = {
       }
       res.json(user);
     } catch (error) {
+      console.error("Ошибка при получении текущего пользователя:", error);
       res.status(500).json({ error: "Ошибка сервера" });
     }
   },
 };
 
-module.exports = UserController;
+module.exports = User;
