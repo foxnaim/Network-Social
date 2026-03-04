@@ -256,10 +256,10 @@ asap@~1.0.0:
   resolved "https://registry.npmjs.org/asap/-/asap-1.0.0.tgz"
   integrity sha512-Ej9qjcXY+8Tuy1cNqiwNMwFRXOy9UwgTeMA8LxreodygIPV48lx8PU1ecFxb5ZeU1DpMKxiq6vGLTxcitWZPbA==
 
-balanced-match@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
-  integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
+balanced-match@^4.0.2:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-4.0.4.tgz#bfb10662feed8196a2c62e7c68e17720c274179a"
+  integrity sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==
 
 basic-auth@~2.0.0:
   version "2.0.1"
@@ -294,13 +294,12 @@ body-parser@1.18.3:
     raw-body "2.3.3"
     type-is "~1.6.16"
 
-brace-expansion@^1.1.7:
-  version "1.1.11"
-  resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.11.tgz#3c7fcbf529d87226f3d2f52b966ff5271eb441dd"
-  integrity sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==
+brace-expansion@^5.0.2:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-5.0.3.tgz#6a9c6c268f85b53959ec527aeafe0f7300258eef"
+  integrity sha512-fy6KJm2RawA5RcHkLa1z/ScpBeA762UF9KmZQxwIbDtRJrgLzM10depAiEQ+CXYcoiqW1/m96OAAoke2nE9EeA==
   dependencies:
-    balanced-match "^1.0.0"
-    concat-map "0.0.1"
+    balanced-match "^4.0.2"
 
 braces@~3.0.2:
   version "3.0.3"
@@ -404,11 +403,6 @@ commander@~2.6.0:
   version "2.6.0"
   resolved "https://registry.npmjs.org/commander/-/commander-2.6.0.tgz"
   integrity sha512-PhbTMT+ilDXZKqH8xbvuUY2ZEQNef0Q7DKxgoEKb4ccytsdvVVJmYqR0sGbi96nxU6oGrwEIQnclpK2NBZuQlg==
-
-concat-map@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
-  integrity sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==
 
 concat-stream@^1.5.2:
   version "1.6.2"
@@ -899,12 +893,12 @@ mime@1.4.1:
   resolved "https://registry.npmjs.org/mime/-/mime-1.4.1.tgz"
   integrity sha512-KI1+qOZu5DcW6wayYHSzR/tXKCDC5Om4s1z2QJjDULzLcmf3DvzS7oluY4HCTrc+9FiKmWUgeNLg7W3uIQvxtQ==
 
-minimatch@^3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.1.2.tgz#19cd194bfd3e428f049a70817c038d89ab4be35b"
-  integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
+minimatch@^10.2.1:
+  version "10.2.3"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-10.2.3.tgz#c0ef582f21071b0123a5bbf275252ebda921fbf6"
+  integrity sha512-Rwi3pnapEqirPSbWbrZaa6N3nmqq4Xer/2XooiOKyV3q12ML06f7MOuc5DVH8ONZIFhwIYQ3yzPH4nt7iWHaTg==
   dependencies:
-    brace-expansion "^1.1.7"
+    brace-expansion "^5.0.2"
 
 minimist@^1.2.6:
   version "1.2.8"
@@ -974,15 +968,15 @@ negotiator@0.6.3:
   resolved "https://registry.npmjs.org/negotiator/-/negotiator-0.6.3.tgz"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
 
-nodemon@^3.1.9:
-  version "3.1.9"
-  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-3.1.9.tgz#df502cdc3b120e1c3c0c6e4152349019efa7387b"
-  integrity sha512-hdr1oIb2p6ZSxu3PB2JWWYS7ZQ0qvaZsc3hK8DR8f02kRzc8rjYmxAIvdz+aYC+8F2IjNaB7HMcSDg8nQpJxyg==
+nodemon@^3.1.14:
+  version "3.1.14"
+  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-3.1.14.tgz#8487ca379c515301d221ec007f27f24ecafa2b51"
+  integrity sha512-jakjZi93UtB3jHMWsXL68FXSAosbLfY0In5gtKq3niLSkrWznrVBzXFNOEMJUfc9+Ke7SHWoAZsiMkNP3vq6Jw==
   dependencies:
     chokidar "^3.5.2"
     debug "^4"
     ignore-by-default "^1.0.1"
-    minimatch "^3.1.2"
+    minimatch "^10.2.1"
     pstree.remy "^1.1.8"
     semver "^7.5.3"
     simple-update-notifier "^2.0.0"
