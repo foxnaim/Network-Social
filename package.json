@@ -7,7 +7,7 @@
     "dev": "nodemon ./bin/www"
   },
   "dependencies": {
-    "@prisma/client": "6.4.1",
+    "@prisma/client": "7.4.1",
     "bcryptjs": "^3.0.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
